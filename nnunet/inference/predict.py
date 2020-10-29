@@ -210,7 +210,7 @@ def predict_cases(model, list_of_lists, output_filenames, folds, save_npz, num_t
 
         print("predicting", output_filename)
         softmax = []
-        for p in params:
+        for p in params:     # params中保存了几个folder的模型，这里将所有模型都再Test数据集上进行测试，然后计算均值
             trainer.load_checkpoint_ram(p, False)
             softmax.append(trainer.predict_preprocessed_data_return_seg_and_softmax(d, do_tta, trainer.data_aug_params[
                 'mirror_axes'], True, step_size=step_size, use_gaussian=True, all_in_gpu=all_in_gpu,
